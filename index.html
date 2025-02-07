@@ -8,98 +8,144 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #ffd6e0;
+            background-color: #ffb6c1;
             text-align: center;
-            padding: 50px;
+            padding: 20px;
             overflow: hidden;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
         .container {
-            max-width: 600px;
-            margin: auto;
+            max-width: 90%;
+            width: 400px;
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
         }
         .gif img {
-            width: 250px;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
         }
         .buttons {
             margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+        }
+        .yes-btn, .no-btn {
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            width: 120px;
+            position: relative;
         }
         .yes-btn {
             background-color: #4CAF50;
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
         }
         .no-btn {
             background-color: #ff4d4d;
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 18px;
+        }
+        .note {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+        .instax-photo {
             position: absolute;
-            cursor: pointer;
-            transition: 0.3s;
+            width: 120px;
+            height: 150px;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            filter: brightness(0.9);
+        }
+        .instax-photo:nth-child(1) { left: 5%; top: 10%; transform: rotate(-10deg); }
+        .instax-photo:nth-child(2) { right: 5%; top: 10%; transform: rotate(10deg); }
+        .instax-photo:nth-child(3) { left: 5%; bottom: 10%; transform: rotate(-5deg); }
+        .instax-photo:nth-child(4) { right: 5%; bottom: 10%; transform: rotate(5deg); }
+        .instax-photo:nth-child(5) { left: 50%; top: 30%; transform: translateX(-50%) rotate(-3deg); }
+        .instax-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
         }
         @keyframes floating-hearts {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+            0% { transform: translateY(0px); opacity: 1; }
+            50% { transform: translateY(-20px); opacity: 0.7; }
+            100% { transform: translateY(-40px); opacity: 0; }
         }
         .heart {
             position: absolute;
-            font-size: 30px;
+            font-size: 20px;
             color: red;
-            animation: floating-hearts 2s infinite ease-in-out;
+            animation: floating-hearts 3s infinite linear;
         }
     </style>
 </head>
 <body>
-    <script>
-        function moveNoButton() {
-            let x = Math.random() * (window.innerWidth - 100);
-            let y = Math.random() * (window.innerHeight - 50);
-            document.getElementById('no-btn').style.left = `${x}px`;
-            document.getElementById('no-btn').style.top = `${y}px`;
-        }
-        function sendEmailAndRedirect() {
-            fetch('https://api.emailservice.com/send', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: 'your-email@example.com', message: 'She said YES!' })
-            }).then(() => {
-                window.location.href = 'yes.html';
-            }).catch(() => {
-                window.location.href = 'yes.html';
-            });
-        }
-    </script>
+    <div class="instax-photo"><img src="IMG_6323.JPG" alt="Memory 1"></div>
+    <div class="instax-photo"><img src="IMG_1623.HEIC" alt="Memory 2"></div>
+    <div class="instax-photo"><img src="IMG_2880.JPG" alt="Memory 3"></div>
+    <div class="instax-photo"><img src="IMG_4102.JPEG" alt="Memory 4"></div>
+    <div class="instax-photo"><img src="IMG_6323.JPG" alt="Memory 5"></div>
     <div class="container">
         <h1>Will You Be My Valentine? ❤️</h1>
         <div class="gif">
             <img src="https://media.giphy.com/media/l3vR3cI9AVj6E/giphy.gif" alt="Cute Gif">
         </div>
         <div class="buttons">
-            <button class="yes-btn" onclick="sendEmailAndRedirect()">Yes</button>
+            <button class="yes-btn" onclick="window.location.href='yes.html'">Yes</button>
             <button id="no-btn" class="no-btn" onmouseover="moveNoButton()">No</button>
         </div>
+        <p class="note">I dare you to click no 😏</p>
     </div>
     <script>
-        for (let i = 0; i < 20; i++) {
-            let heart = document.createElement('div');
-            heart.innerHTML = '❤️';
-            heart.className = 'heart';
-            heart.style.left = Math.random() * window.innerWidth + 'px';
-            heart.style.top = Math.random() * window.innerHeight + 'px';
-            document.body.appendChild(heart);
+        function moveNoButton() {
+            let noBtn = document.getElementById('no-btn');
+            let containerRect = document.querySelector('.container').getBoundingClientRect();
+            let maxX = window.innerWidth - noBtn.offsetWidth - 50;
+            let maxY = window.innerHeight - noBtn.offsetHeight - 50;
+            
+            let newX, newY;
+            do {
+                newX = Math.random() * maxX;
+                newY = Math.random() * maxY;
+            } while (newX > containerRect.left && newX < containerRect.right && newY > containerRect.top && newY < containerRect.bottom);
+            
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${newX}px`;
+            noBtn.style.top = `${newY}px`;
         }
+        function createHearts() {
+            for (let i = 0; i < 10; i++) {
+                let heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.className = 'heart';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.top = Math.random() * window.innerHeight + 'px';
+                heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }
+        }
+        setInterval(createHearts, 2000);
     </script>
 </body>
 </html>
+
