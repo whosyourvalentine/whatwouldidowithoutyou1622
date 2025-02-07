@@ -55,25 +55,25 @@
             border: none;
             cursor: pointer;
             width: 80px;
-            position: absolute;
+            position: relative;
         }
         .yes-btn {
             background-color: #4CAF50;
             color: white;
-            left: 50%;
-            transform: translateX(-120%);
         }
         .no-btn {
             background-color: #ff4d4d;
             color: white;
-            left: 50%;
-            transform: translateX(20%);
         }
         .note {
-            margin-top: 10px;
-            font-size: 12px;
+            margin-top: 30px;
+            font-size: 14px;
             font-weight: bold;
             color: #d32f2f;
+            position: absolute;
+            top: 85%;
+            left: 50%;
+            transform: translateX(-50%);
         }
         .instax-photo {
             position: absolute;
@@ -86,15 +86,40 @@
             filter: brightness(0.9);
             z-index: 1;
         }
-        .instax-photo:nth-child(1) { left: 5%; top: 15%; transform: rotate(-10deg); }
-        .instax-photo:nth-child(2) { right: 5%; top: 15%; transform: rotate(10deg); }
-        .instax-photo:nth-child(3) { left: 5%; bottom: 15%; transform: rotate(-5deg); }
-        .instax-photo:nth-child(4) { right: 5%; bottom: 15%; transform: rotate(5deg); }
+        .instax-photo:nth-child(1) { left: 10%; top: 15%; transform: rotate(-10deg); }
+        .instax-photo:nth-child(2) { right: 10%; top: 15%; transform: rotate(10deg); }
+        .instax-photo:nth-child(3) { left: 10%; bottom: 15%; transform: rotate(-5deg); }
+        .instax-photo:nth-child(4) { right: 10%; bottom: 15%; transform: rotate(5deg); }
         .instax-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 5px;
+        }
+        @keyframes floating-hearts {
+            0% { transform: translateY(0px); opacity: 1; }
+            50% { transform: translateY(-20px); opacity: 0.7; }
+            100% { transform: translateY(-40px); opacity: 0; }
+        }
+        @keyframes floating-stars {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-30px) rotate(45deg); opacity: 0.8; }
+            100% { transform: translateY(-60px) rotate(90deg); opacity: 0; }
+        }
+        .heart, .star {
+            position: absolute;
+            font-size: 20px;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        .heart {
+            color: red;
+            animation-name: floating-hearts;
+        }
+        .star {
+            color: gold;
+            animation-name: floating-stars;
         }
     </style>
 </head>
@@ -117,26 +142,30 @@
     <script>
         function moveNoButton() {
             const noBtn = document.getElementById('no-btn');
-            const container = document.querySelector('.container');
-            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-            let newX, newY;
+            let maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            let maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            let newX = Math.random() * maxX;
+            let newY = Math.random() * maxY;
             
-            do {
-                newX = Math.random() * maxX;
-                newY = Math.random() * maxY;
-            } while (
-                newX > container.offsetLeft - noBtn.offsetWidth &&
-                newX < container.offsetLeft + container.offsetWidth &&
-                newY > container.offsetTop - noBtn.offsetHeight &&
-                newY < container.offsetTop + container.offsetHeight
-            );
-            
+            noBtn.style.position = 'absolute';
             noBtn.style.left = `${newX}px`;
             noBtn.style.top = `${newY}px`;
         }
+        function createFloatingObjects() {
+            const objects = ['❤️', '✨', '⭐'];
+            const floatingDiv = document.createElement('div');
+            floatingDiv.innerHTML = objects[Math.floor(Math.random() * objects.length)];
+            floatingDiv.className = floatingDiv.innerHTML === '❤️' ? 'heart' : 'star';
+            floatingDiv.style.left = Math.random() * window.innerWidth + 'px';
+            floatingDiv.style.top = Math.random() * window.innerHeight + 'px';
+            floatingDiv.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            document.body.appendChild(floatingDiv);
+            setTimeout(() => floatingDiv.remove(), 5000);
+        }
+        setInterval(createFloatingObjects, 500);
     </script>
 </body>
 </html>
+
 
 
