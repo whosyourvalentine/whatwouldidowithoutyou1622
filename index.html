@@ -20,40 +20,41 @@
             height: 100vh;
         }
         .container {
-            max-width: 90%;
-            width: 350px;
+            max-width: 80%;
+            width: 300px;
             background: white;
-            padding: 15px;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
             position: relative;
             z-index: 2;
+            margin-top: 10px;
         }
         @media (max-width: 768px) {
             .container {
-                width: 300px;
-                padding: 10px;
+                width: 250px;
+                padding: 15px;
             }
         }
         .gif img {
             width: 100%;
-            max-width: 250px;
+            max-width: 200px;
             border-radius: 10px;
         }
         .buttons {
-            margin-top: 20px;
+            margin-top: 15px;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             position: relative;
         }
         .yes-btn, .no-btn {
-            font-size: 16px;
-            padding: 10px 15px;
+            font-size: 14px;
+            padding: 8px 12px;
             border-radius: 5px;
             border: none;
             cursor: pointer;
-            width: 100px;
+            width: 80px;
             position: relative;
         }
         .yes-btn {
@@ -66,24 +67,24 @@
         }
         .note {
             margin-top: 10px;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             color: #d32f2f;
         }
         .instax-photo {
             position: absolute;
-            width: 120px;
-            height: 150px;
+            width: 110px;
+            height: 140px;
             background: white;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 8px;
+            border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             filter: brightness(0.9);
         }
-        .instax-photo:nth-child(1) { left: 5%; top: 10%; transform: rotate(-10deg); }
-        .instax-photo:nth-child(2) { right: 5%; top: 10%; transform: rotate(10deg); }
-        .instax-photo:nth-child(3) { left: 5%; bottom: 10%; transform: rotate(-5deg); }
-        .instax-photo:nth-child(4) { right: 5%; bottom: 10%; transform: rotate(5deg); }
+        .instax-photo:nth-child(1) { left: 10%; top: 15%; transform: rotate(-10deg); }
+        .instax-photo:nth-child(2) { right: 10%; top: 15%; transform: rotate(10deg); }
+        .instax-photo:nth-child(3) { left: 10%; bottom: 15%; transform: rotate(-5deg); }
+        .instax-photo:nth-child(4) { right: 10%; bottom: 15%; transform: rotate(5deg); }
         .instax-photo img {
             width: 100%;
             height: 100%;
@@ -95,17 +96,32 @@
             50% { transform: translateY(-20px); opacity: 0.7; }
             100% { transform: translateY(-40px); opacity: 0; }
         }
-        .heart {
+        @keyframes floating-stars {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-30px) rotate(45deg); opacity: 0.8; }
+            100% { transform: translateY(-60px) rotate(90deg); opacity: 0; }
+        }
+        .heart, .star {
             position: absolute;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        .heart {
             font-size: 20px;
             color: red;
-            animation: floating-hearts 3s infinite linear;
+            animation-name: floating-hearts;
+        }
+        .star {
+            font-size: 16px;
+            color: gold;
+            animation-name: floating-stars;
         }
     </style>
 </head>
 <body>
     <div class="instax-photo"><img src="IMG_6323.JPG" alt="Memory 1"></div>
-    <div class="instax-photo"><img src="IMG_1623.HEIC" alt="Memory 2"></div>
+    <div class="instax-photo"><img src="IMG_1623.JPG" alt="Memory 2"></div>
     <div class="instax-photo"><img src="IMG_2880.JPG" alt="Memory 3"></div>
     <div class="instax-photo"><img src="IMG_3629.JPG" alt="Memory 4"></div>
     <div class="container">
@@ -131,11 +147,11 @@
             let newX, newY;
 
             do {
-                newX = Math.random() * (containerRect.width - noBtn.offsetWidth);
-                newY = Math.random() * (containerRect.height - noBtn.offsetHeight);
+                newX = Math.random() * maxX;
+                newY = Math.random() * maxY;
             } while (
-                newX > 100 && // Ensures enough distance from the "Yes" button
-                newY > 50
+                newX < 100 && // Prevents overlap with "Yes" button
+                newY < 50
             );
 
             noBtn.style.position = 'absolute';
@@ -143,19 +159,20 @@
             noBtn.style.top = `${newY + containerRect.top}px`;
         }
 
-        function createHearts() {
-            for (let i = 0; i < 10; i++) {
-                let heart = document.createElement('div');
-                heart.innerHTML = '❤️';
-                heart.className = 'heart';
-                heart.style.left = Math.random() * window.innerWidth + 'px';
-                heart.style.top = Math.random() * window.innerHeight + 'px';
-                heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 5000);
-            }
+        function createFloatingObjects() {
+            const objects = ['❤️', '✨', '⭐'];
+            const randomObject = objects[Math.floor(Math.random() * objects.length)];
+            const floatingDiv = document.createElement('div');
+            floatingDiv.innerHTML = randomObject;
+            floatingDiv.className = randomObject === '❤️' ? 'heart' : 'star';
+            floatingDiv.style.left = Math.random() * window.innerWidth + 'px';
+            floatingDiv.style.top = Math.random() * window.innerHeight + 'px';
+            floatingDiv.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            document.body.appendChild(floatingDiv);
+            setTimeout(() => floatingDiv.remove(), 5000);
         }
-        setInterval(createHearts, 2000);
+
+        setInterval(createFloatingObjects, 500);
     </script>
 </body>
 </html>
