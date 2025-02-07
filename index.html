@@ -121,21 +121,31 @@
     </div>
     <script>
         function moveNoButton() {
-            let noBtn = document.getElementById('no-btn');
-            let containerRect = document.querySelector('.container').getBoundingClientRect();
-            let maxX = window.innerWidth - noBtn.offsetWidth - 50;
-            let maxY = window.innerHeight - noBtn.offsetHeight - 50;
-            
+            const noBtn = document.getElementById('no-btn');
+            const yesBtn = document.querySelector('.yes-btn');
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+
+            const maxX = containerRect.width - noBtn.offsetWidth - 20;
+            const maxY = containerRect.height - noBtn.offsetHeight - 20;
+
             let newX, newY;
+
             do {
-                newX = Math.random() * maxX;
-                newY = Math.random() * maxY;
-            } while (newX > containerRect.left && newX < containerRect.right && newY > containerRect.top && newY < containerRect.bottom);
-            
+                newX = Math.random() * maxX + containerRect.left;
+                newY = Math.random() * maxY + containerRect.top;
+            } while (
+                newX > yesBtn.offsetLeft - noBtn.offsetWidth &&
+                newX < yesBtn.offsetLeft + yesBtn.offsetWidth &&
+                newY > yesBtn.offsetTop - noBtn.offsetHeight &&
+                newY < yesBtn.offsetTop + yesBtn.offsetHeight
+            );
+
             noBtn.style.position = 'absolute';
             noBtn.style.left = `${newX}px`;
             noBtn.style.top = `${newY}px`;
         }
+
         function createHearts() {
             for (let i = 0; i < 10; i++) {
                 let heart = document.createElement('div');
@@ -152,3 +162,4 @@
     </script>
 </body>
 </html>
+
