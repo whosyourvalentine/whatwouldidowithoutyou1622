@@ -111,7 +111,7 @@
     <div class="container">
         <h1>Will You Be My Valentine? ❤️</h1>
         <div class="gif">
-            <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTFsbTJ2aGhzYWttYmF6ZW05NGZleXMxcXJ6M29qYWhhdno0OGszbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/vDhDcIEmShbUI/giphy.gif" alt="Cute Gif">
+            <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmEwODN0ZmQwZnkybnM0YnRyc2Ztd2txODMybWV6b2syc2NnNDQ1MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/vDhDcIEmShbUI/giphy.gif" alt="Cute Gif">
         </div>
         <div class="buttons">
             <button class="yes-btn" onclick="window.location.href='yes.html'">Yes</button>
@@ -122,7 +122,6 @@
     <script>
         function moveNoButton() {
             const noBtn = document.getElementById('no-btn');
-            const yesBtn = document.querySelector('.yes-btn');
             const container = document.querySelector('.container');
             const containerRect = container.getBoundingClientRect();
 
@@ -132,18 +131,16 @@
             let newX, newY;
 
             do {
-                newX = Math.random() * maxX + containerRect.left;
-                newY = Math.random() * maxY + containerRect.top;
+                newX = Math.random() * (containerRect.width - noBtn.offsetWidth);
+                newY = Math.random() * (containerRect.height - noBtn.offsetHeight);
             } while (
-                newX > yesBtn.offsetLeft - noBtn.offsetWidth &&
-                newX < yesBtn.offsetLeft + yesBtn.offsetWidth &&
-                newY > yesBtn.offsetTop - noBtn.offsetHeight &&
-                newY < yesBtn.offsetTop + yesBtn.offsetHeight
+                newX > 100 && // Ensures enough distance from the "Yes" button
+                newY > 50
             );
 
             noBtn.style.position = 'absolute';
-            noBtn.style.left = `${newX}px`;
-            noBtn.style.top = `${newY}px`;
+            noBtn.style.left = `${newX + containerRect.left}px`;
+            noBtn.style.top = `${newY + containerRect.top}px`;
         }
 
         function createHearts() {
