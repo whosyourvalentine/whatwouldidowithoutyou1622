@@ -21,17 +21,23 @@
         }
         .container {
             max-width: 90%;
-            width: 400px;
+            width: 350px;
             background: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 2;
         }
+        @media (max-width: 768px) {
+            .container {
+                width: 300px;
+                padding: 10px;
+            }
+        }
         .gif img {
             width: 100%;
-            max-width: 300px;
+            max-width: 250px;
             border-radius: 10px;
         }
         .buttons {
@@ -42,12 +48,12 @@
             position: relative;
         }
         .yes-btn, .no-btn {
-            font-size: 18px;
-            padding: 10px 20px;
+            font-size: 16px;
+            padding: 10px 15px;
             border-radius: 5px;
             border: none;
             cursor: pointer;
-            width: 120px;
+            width: 100px;
             position: relative;
         }
         .yes-btn {
@@ -60,7 +66,7 @@
         }
         .note {
             margin-top: 10px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
             color: #d32f2f;
         }
@@ -78,7 +84,7 @@
         .instax-photo:nth-child(2) { right: 5%; top: 10%; transform: rotate(10deg); }
         .instax-photo:nth-child(3) { left: 5%; bottom: 10%; transform: rotate(-5deg); }
         .instax-photo:nth-child(4) { right: 5%; bottom: 10%; transform: rotate(5deg); }
-        .instax-photo:nth-child(5) { left: 50%; top: 30%; transform: translateX(-50%) rotate(-3deg); }
+        
         .instax-photo img {
             width: 100%;
             height: 100%;
@@ -102,8 +108,7 @@
     <div class="instax-photo"><img src="IMG_6323.JPG" alt="Memory 1"></div>
     <div class="instax-photo"><img src="IMG_1623.HEIC" alt="Memory 2"></div>
     <div class="instax-photo"><img src="IMG_2880.JPG" alt="Memory 3"></div>
-    <div class="instax-photo"><img src="IMG_4102.JPEG" alt="Memory 4"></div>
-    <div class="instax-photo"><img src="IMG_6323.JPG" alt="Memory 5"></div>
+    <div class="instax-photo"><img src="IMG_3629.JPG" alt="Memory 4"></div>
     <div class="container">
         <h1>Will You Be My Valentine? ❤️</h1>
         <div class="gif">
@@ -148,4 +153,5 @@
     </script>
 </body>
 </html>
+
 
