@@ -20,10 +20,10 @@
             height: 100vh;
         }
         .container {
-            max-width: 80%;
-            width: 300px;
+            max-width: 70%;
+            width: 280px;
             background: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
             position: relative;
@@ -32,13 +32,13 @@
         }
         @media (max-width: 768px) {
             .container {
-                width: 250px;
-                padding: 15px;
+                width: 230px;
+                padding: 12px;
             }
         }
         .gif img {
             width: 100%;
-            max-width: 200px;
+            max-width: 180px;
             border-radius: 10px;
         }
         .buttons {
@@ -71,59 +71,9 @@
             font-weight: bold;
             color: #d32f2f;
         }
-        .instax-photo {
-            position: absolute;
-            width: 110px;
-            height: 140px;
-            background: white;
-            padding: 8px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            filter: brightness(0.9);
-        }
-        .instax-photo:nth-child(1) { left: 10%; top: 15%; transform: rotate(-10deg); }
-        .instax-photo:nth-child(2) { right: 10%; top: 15%; transform: rotate(10deg); }
-        .instax-photo:nth-child(3) { left: 10%; bottom: 15%; transform: rotate(-5deg); }
-        .instax-photo:nth-child(4) { right: 10%; bottom: 15%; transform: rotate(5deg); }
-        .instax-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        @keyframes floating-hearts {
-            0% { transform: translateY(0px); opacity: 1; }
-            50% { transform: translateY(-20px); opacity: 0.7; }
-            100% { transform: translateY(-40px); opacity: 0; }
-        }
-        @keyframes floating-stars {
-            0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
-            50% { transform: translateY(-30px) rotate(45deg); opacity: 0.8; }
-            100% { transform: translateY(-60px) rotate(90deg); opacity: 0; }
-        }
-        .heart, .star {
-            position: absolute;
-            animation-duration: 3s;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-        }
-        .heart {
-            font-size: 20px;
-            color: red;
-            animation-name: floating-hearts;
-        }
-        .star {
-            font-size: 16px;
-            color: gold;
-            animation-name: floating-stars;
-        }
     </style>
 </head>
 <body>
-    <div class="instax-photo"><img src="IMG_6323.JPG" alt="Memory 1"></div>
-    <div class="instax-photo"><img src="IMG_1623.JPG" alt="Memory 2"></div>
-    <div class="instax-photo"><img src="IMG_2880.JPG" alt="Memory 3"></div>
-    <div class="instax-photo"><img src="IMG_3629.JPG" alt="Memory 4"></div>
     <div class="container">
         <h1>Will You Be My Valentine? ❤️</h1>
         <div class="gif">
@@ -135,45 +85,6 @@
         </div>
         <p class="note">I dare you to click no 😏</p>
     </div>
-    <script>
-        function moveNoButton() {
-            const noBtn = document.getElementById('no-btn');
-            const container = document.querySelector('.container');
-            const containerRect = container.getBoundingClientRect();
-
-            const maxX = containerRect.width - noBtn.offsetWidth - 20;
-            const maxY = containerRect.height - noBtn.offsetHeight - 20;
-
-            let newX, newY;
-
-            do {
-                newX = Math.random() * maxX;
-                newY = Math.random() * maxY;
-            } while (
-                newX < 100 && // Prevents overlap with "Yes" button
-                newY < 50
-            );
-
-            noBtn.style.position = 'absolute';
-            noBtn.style.left = `${newX + containerRect.left}px`;
-            noBtn.style.top = `${newY + containerRect.top}px`;
-        }
-
-        function createFloatingObjects() {
-            const objects = ['❤️', '✨', '⭐'];
-            const randomObject = objects[Math.floor(Math.random() * objects.length)];
-            const floatingDiv = document.createElement('div');
-            floatingDiv.innerHTML = randomObject;
-            floatingDiv.className = randomObject === '❤️' ? 'heart' : 'star';
-            floatingDiv.style.left = Math.random() * window.innerWidth + 'px';
-            floatingDiv.style.top = Math.random() * window.innerHeight + 'px';
-            floatingDiv.style.animationDuration = `${Math.random() * 3 + 2}s`;
-            document.body.appendChild(floatingDiv);
-            setTimeout(() => floatingDiv.remove(), 5000);
-        }
-
-        setInterval(createFloatingObjects, 500);
-    </script>
 </body>
 </html>
 
