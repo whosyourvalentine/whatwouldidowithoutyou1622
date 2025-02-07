@@ -64,12 +64,35 @@
         .no-btn {
             background-color: #ff4d4d;
             color: white;
+            position: absolute;
         }
         .note {
             margin-top: 10px;
             font-size: 12px;
             font-weight: bold;
             color: #d32f2f;
+        }
+        @keyframes floating-hearts {
+            0% { transform: translateY(0px); opacity: 1; }
+            50% { transform: translateY(-20px); opacity: 0.7; }
+            100% { transform: translateY(-40px); opacity: 0; }
+        }
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: red;
+            animation: floating-hearts 3s infinite linear;
+        }
+        @keyframes floating-stars {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-30px) rotate(45deg); opacity: 0.8; }
+            100% { transform: translateY(-60px) rotate(90deg); opacity: 0; }
+        }
+        .star {
+            position: absolute;
+            font-size: 16px;
+            color: gold;
+            animation: floating-stars 3s infinite linear;
         }
     </style>
 </head>
@@ -85,6 +108,40 @@
         </div>
         <p class="note">I dare you to click no 😏</p>
     </div>
+    <script>
+        function moveNoButton() {
+            const noBtn = document.getElementById('no-btn');
+            const yesBtn = document.querySelector('.yes-btn');
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            let newX, newY;
+            
+            do {
+                newX = Math.random() * maxX;
+                newY = Math.random() * maxY;
+            } while (
+                newX > yesBtn.offsetLeft - noBtn.offsetWidth &&
+                newX < yesBtn.offsetLeft + yesBtn.offsetWidth &&
+                newY > yesBtn.offsetTop - noBtn.offsetHeight &&
+                newY < yesBtn.offsetTop + yesBtn.offsetHeight
+            );
+            
+            noBtn.style.left = `${newX}px`;
+            noBtn.style.top = `${newY}px`;
+        }
+        function createFloatingObjects() {
+            const objects = ['❤️', '✨', '⭐'];
+            const randomObject = objects[Math.floor(Math.random() * objects.length)];
+            const floatingDiv = document.createElement('div');
+            floatingDiv.innerHTML = randomObject;
+            floatingDiv.className = randomObject === '❤️' ? 'heart' : 'star';
+            floatingDiv.style.left = Math.random() * window.innerWidth + 'px';
+            floatingDiv.style.top = Math.random() * window.innerHeight + 'px';
+            floatingDiv.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            document.body.appendChild(floatingDiv);
+            setTimeout(() => floatingDiv.remove(), 5000);
+        }
+        setInterval(createFloatingObjects, 500);
+    </script>
 </body>
 </html>
-
