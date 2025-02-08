@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Valentine's Plans</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap">
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive;
+            background-color: #fff0f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #ff69b4;
+            color: white;
+            padding: 20px 0;
+            font-size: 2em;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .day {
+            background-color: #ffe4e1;
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #ff1493;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+        .images img {
+            width: 100%;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ff1493;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ff69b4;
+        }
+
+        footer {
+            background-color: #ff69b4;
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 1.2em;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            clip-path: polygon(50% 0%, 100% 35%, 85% 100%, 50% 80%, 15% 100%, 0% 35%);
+            opacity: 0.7;
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Our Valentine's Plans 💖
+    </header>
+    <div class="container">
+        <section class="day">
+            <h2>Day 1: Romantic Hotel Stay</h2>
+            <p>We'll begin our Valentine's celebration with a luxurious stay at a romantic hotel, where we can relax and enjoy each other's company.</p>
+            <div class="images">
+                <img src="hotel_image.jpg" alt="Romantic Hotel">
+            </div>
+        </section>
+        <section class="day">
+            <h2>Day 2: Dinner & Yoga with Cute Fluffy Furry Animals</h2>
+            <p>Our second day starts with a delightful dinner at your favorite restaurant, followed by a fun and relaxing yoga session with adorable, fluffy animals!</p>
+            <div class="images">
+                <img src="dinner_image.jpg" alt="Romantic Dinner">
+                <img src="yoga_animals.jpg" alt="Yoga with Fluffy Animals">
+            </div>
+        </section>
+        <a href="riddle.html" class="btn">Guess What Else?</a>
+    </div>
+    <footer>
+        Looking forward to spending this special time with you! ❤️
+    </footer>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
