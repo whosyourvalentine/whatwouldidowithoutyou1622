@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter to My Love</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap">
+    <style>
+        body {
+            font-family: 'Courier Prime', monospace;
+            background-color: #fff0f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #ff69b4;
+            color: white;
+            padding: 20px 0;
+            font-size: 2em;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #ff1493;
+        }
+
+        p {
+            font-size: 1em;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ff1493;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ff69b4;
+        }
+
+        footer {
+            background-color: #ff69b4;
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 1.2em;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            clip-path: polygon(50% 0%, 100% 35%, 85% 100%, 50% 80%, 15% 100%, 0% 35%);
+            opacity: 0.7;
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        A Letter to My Love 💌
+    </header>
+    <div class="container">
+        <h2>My Dearest Love,</h2>
+        <p>
+            Ever since the moment I saw you in high school, I knew I would one day make you mine. 
+            From the first cupcake I got you to the lorry of chocolates, it's clear—I just want to spoil you endlessly. 
+            I want to give you the world and cherish every moment with you.
+        </p>
+        <p>
+            We've faced tough times together, and sometimes one dark moment can overshadow 
+            the many delightful ones we've shared. But the strongest bonds are forged through challenges, 
+            and we have always come out on top. The truth is, no matter what we go through, 
+            I know we are inseparable. I would choose you a million times over in another life or if we had to start anew.
+        </p>
+        <p>
+            I love you unconditionally, and my love only grows stronger each day. 
+            I am so grateful to have you as my Valentine, and I cannot wait to spoil you. 💖
+        </p>
+        <a href="valentines_events.html" class="btn">Back to Our Plans</a>
+    </div>
+    <footer>
+        Forever Yours, ❤️
+    </footer>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
