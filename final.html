@@ -3,29 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Surprise!</title>
+    <title>Surprise! 🎊</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #ffd6e0;
+            background-color: #ffb6c1;
             text-align: center;
-            padding: 50px;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
         .container {
-            max-width: 600px;
-            margin: auto;
+            max-width: 80%;
+            width: 300px;
             background: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        .gif img {
+            width: 100%;
+            max-width: 220px;
+            border-radius: 10px;
+        }
+        .message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d32f2f;
+            margin-top: 15px;
+        }
+        @keyframes floating-hearts {
+            0% { transform: translateY(0px); opacity: 1; }
+            50% { transform: translateY(-20px); opacity: 0.7; }
+            100% { transform: translateY(-40px); opacity: 0; }
+        }
+        @keyframes floating-stars {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-30px) rotate(45deg); opacity: 0.8; }
+            100% { transform: translateY(-60px) rotate(90deg); opacity: 0; }
+        }
+        .heart, .star {
+            position: absolute;
+            font-size: 20px;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        .heart {
+            color: red;
+            animation-name: floating-hearts;
+        }
+        .star {
+            color: gold;
+            animation-name: floating-stars;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Surprise! 🎉</h1>
-        <p>Check your front door... Someone special is waiting for you! ❤️</p>
+        <h1>Surprise! 🎊</h1>
+        <div class="gif">
+            <img src="https://media.giphy.com/media/3ohhwF34cGDoFFhRfy/giphy.gif" alt="Excited Gif">
+        </div>
+        <p class="message">
+            You made it to the end... but there's <b>one last surprise!</b>  
+            <br><br> **Go check your front door 😉**  
+        </p>
     </div>
+    <script>
+        function createFloatingObjects() {
+            const objects = ['❤️', '✨', '⭐'];
+            const randomObject = objects[Math.floor(Math.random() * objects.length)];
+            const floatingDiv = document.createElement('div');
+            floatingDiv.innerHTML = randomObject;
+            floatingDiv.className = randomObject === '❤️' ? 'heart' : 'star';
+            floatingDiv.style.left = Math.random() * window.innerWidth + 'px';
+            floatingDiv.style.top = Math.random() * window.innerHeight + 'px';
+            floatingDiv.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            document.body.appendChild(floatingDiv);
+            setTimeout(() => floatingDiv.remove(), 5000);
+        }
+        setInterval(createFloatingObjects, 500);
+    </script>
 </body>
 </html>
